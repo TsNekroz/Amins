@@ -7602,6 +7602,11 @@ textarea.form-control-lg {
 .text-center {
   text-align: center !important;
 }
+.text-centers {
+  text-align: center !important;
+  padding-top: 50px;
+}
+
 
 .text-decoration-none {
   text-decoration: none !important;
