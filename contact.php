@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
-require 'clases/conexion.php';
-require 'clases/message.php';
+require 'conexion.php';
+require 'message.php';
 $db = new database();
 $con = $db->conectar();
 
@@ -14,7 +14,7 @@ if (!empty($_POST)) {
     $mensaje = trim($_POST['message']);
  
 
-    $producto = registrar([$name, $email, $phone,$mensaje], $con); 
+    $contact = registrar([$name, $email, $phone,$mensaje], $con); 
     
 }
 
@@ -65,7 +65,7 @@ if (!empty($_POST)) {
         </div>
         
 
-        <form id="contactForm" action="clases/message.php" method="post" autocomplete="off">
+        <form id="contactForm" action="contact.php" method="post" autocomplete="off">
             <div class="row align-items-stretch mb-5">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -89,16 +89,6 @@ if (!empty($_POST)) {
                         <textarea name="message" id="message" placeholder="Ingrese su Mensaje *" class="form-control" required></textarea>
     
                 </div>
-            </div>
-
-            <div class="d-none" id="submitSuccessMessage">
-                <div class="text-center text-white mb-3">
-                    <div class="fw-bolder">¡Gracias por contactarnos!</div>
-                </div>
-            </div>
-
-            <div class="d-none" id="submitErrorMessage">
-                <div class="text-center text-danger mb-3">¡Error al enviar mensaje!</div>
             </div>
 
             <div class="text-center">
