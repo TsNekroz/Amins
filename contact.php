@@ -5,18 +5,7 @@ require 'message.php';
 $db = new database();
 $con = $db->conectar();
 
-$errors = [];
 
-if (!empty($_POST)) {
-    $name = trim($_POST['names']);
-    $email = trim($_POST['email']);
-    $phone = trim($_POST['phone']);
-    $mensaje = trim($_POST['message']);
- 
-
-    $contact = registrar([$name, $email, $phone,$mensaje], $con); 
-    
-}
 
 
 ?>
@@ -66,7 +55,43 @@ if (!empty($_POST)) {
         
 
         <form id="contactForm" action="contact.php" method="post" autocomplete="off">
-            <div class="row align-items-stretch mb-5">
+            <?php
+    if (isset($_POST['names'])) {
+        $name = $_POST['names'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $message = $_POST['message'];
+
+        $campos = array();
+        if ($name == "" || strlen($name) > 50) {
+            $campos[] = "El nombre no puede estar en blanco ni contener más de 50 caracteres.";
+        }
+
+        if ($email == "" || strlen($email) > 50) {
+            $campos[] = "El correo electrónico no puede estar en blanco ni contener más de 50 caracteres.";
+        }
+
+        if ($phone == "" || strlen($phone) != 10) {
+            $campos[] = "El teléfono no puede estar en blanco y debe contener exactamente 10 caracteres.";
+        }
+
+        if ($message == "" || strlen($message) > 300) {
+            $campos[] = "El mensaje no puede estar en blanco ni contener más de 300 caracteres.";
+        }
+
+        if (count($campos) > 0) {
+            echo '<div class="alert alert-danger" role="alert">ERROR.</div>';
+            foreach ($campos as $campo) {
+                echo '<div class="alert alert-danger" role="alert">'.$campo.'</div>';
+            }
+        } else {
+            $contact = registrar([$name, $email, $phone,$message], $con); 
+            echo '<div class="alert alert-success" role="alert">Enviados correctamente.</div>';
+        }
+    }
+?>
+
+                <div class="row align-items-stretch mb-5">
                 <div class="col-md-6">
                     <div class="form-group">
                         <!-- Name input-->
