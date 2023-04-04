@@ -72,7 +72,7 @@ $con = $db->conectar();
         }
 
         if ($phone == "" || strlen($phone) != 10) {
-            $campos[] = "El teléfono no puede estar en blanco y debe contener exactamente 10 caracteres.";
+            $campos[] = "El teléfono no puede estar en blanco y debe contener exactamente 10 Numeros.";
         }
 
         if ($message == "" || strlen($message) > 300) {
